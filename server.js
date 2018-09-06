@@ -18,5 +18,5 @@ app.use(express.static("client"));
 app.use(bodyParser.json());
 
 app.listen(port, () => {
-  console.log('TRUE AI on port', port);
+  console.log('Port: ', port);
 });
