@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import wordsAutocompletion from '../../dictionaries/words';
 import expressionAutocompletion from "../../dictionaries/expressions";
 import ReactDOM from 'react-dom';
@@ -21,7 +21,7 @@ const setCursor = (wordLength) => {
   sel.addRange(range);
 };
 
-export class MessageBox extends React.Component {
+export class MessageBox extends React.PureComponent {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();

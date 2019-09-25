@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { MessageBox } from "../MessageBox/MessageBox";
 import { MatchList } from "../MatchList/MatchList";
@@ -16,25 +16,22 @@ export class App extends React.Component {
       matchListFlag: false,
       exactExpression: '',
     };
-
-    this.matchListToggle = this.matchListToggle.bind(this);
-    this.passChoosenExpression = this.passChoosenExpression.bind(this);
   }
 
-  matchListToggle(toggleFlag) {
+  matchListToggle = (toggleFlag) => {
     this.setState({
       matchListFlag: toggleFlag
     })
   }
 
-  passChoosenExpression(value) {
+  passChoosenExpression = (value) => {
     this.setState({
       exactExpression: value,
       matchListFlag: false
     })
   }
 
-  updateInputValue(evt) {
+  updateInputValue = (evt) => {
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -47,7 +44,7 @@ export class App extends React.Component {
         <div className="col-md-3">
           <ul className="list-group">
             <li className="list-group-item active">Words list: </li>
-              {Object.keys(wordsAutocompletion).map(function (key) {
+              {Object.keys(wordsAutocompletion).map((key) => {
                 return <li className="list-group-item" key={key}>
                   <mark>{key}</mark>
                   for => {wordsAutocompletion[key]}</li>

@@ -1,13 +1,12 @@
 const wordsAutocompletion = {
     do: 'done',
-    // be: 'believe',
     ka: 'karma',
     ki: 'kind',
     re: 'regards',
     al: 'also',
     co: 'cookie',
     gl: 'glad',
-    He: 'Hello'
+    he: 'Hello'
 };
 
 export default wordsAutocompletion;

@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import expressionAutocompletion from '../../dictionaries/expressions';
 
-export class MatchList extends React.Component {
+export class MatchList extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       choosenExpression: ''
     };
-
-    this.chooseSelection = this.chooseSelection.bind(this);
   }
 
-  chooseSelection(e) {
+  chooseSelection = (e) => {
     let value = e.target.dataset.value;
     this.props.choosenValue(value);
   }
@@ -20,7 +18,7 @@ export class MatchList extends React.Component {
   render() {
 
     const listItems = expressionAutocompletion['Nice to'].map((el, index) => {
-      return (<li key={index}  data-value={el} data-testid={index} onClick={this.chooseSelection} className="list-group-item list-group-item-action">
+      return (<li key={index} data-value={el} data-testid={index} onClick={this.chooseSelection} className="list-group-item list-group-item-action">
         {el}
       </li>)
     });
