@@ -1,3 +1,3 @@
-Google smart compose replica
+React google smart compose:
 
-```npm start```
+Run project: ```npm start```
