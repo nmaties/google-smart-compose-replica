@@ -1,6 +1,6 @@
 .card {
   padding: 0;
-  margin-top: 2%;
+  margin-top: 40px;
 }
 
 .box {
@@ -10,7 +10,14 @@
   border: 1px solid lightgray;
 }
 
+.wordsList {
+  padding: 0;
+  margin-top: 40px;
+  height: 380px;
+  overflow: scroll;
+  text-align: center;
+}
+
 .autocompletion-text {
   color: lightgray;
-  font-style: italic;
 }

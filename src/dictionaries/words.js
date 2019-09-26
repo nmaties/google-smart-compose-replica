@@ -1,12 +1,14 @@
-const wordsAutocompletion = {
-    do: 'done',
-    ka: 'karma',
-    ki: 'kind',
-    re: 'regards',
-    al: 'also',
-    co: 'cookie',
-    gl: 'glad',
-    he: 'Hello'
-};
-
-export default wordsAutocompletion;
+export const WordsList = {
+  get getWordsList() {
+    return this.wordsList ? this.wordsList : {};
+  },
+  set setWordsList(newWords) {
+    if(!this.wordsList) {
+      this.wordsList = {};
+    }
+    this.wordsList = {
+      ...this.wordsList,
+      ...newWords
+    };
+  }
+}

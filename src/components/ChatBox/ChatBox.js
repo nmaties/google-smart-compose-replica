@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Chatbox.css';
+import { WordsList } from '../../dictionaries/words';
 
 const MAX_NUMBER_OF_LETTERS_CHECKED = 4;
+const MIN_CHAR_DIFFERENCE_BETWEEN_WORD_AND_ABBR = 2;
+
 const setCursor = (wordLength) => {
   const el = document.getElementById("box");
   const range = document.createRange();
@@ -20,11 +23,7 @@ class ChatBox extends React.PureComponent {
       matchedTerm: '',
       matchedWord: false,
       html: '',
-      words: {
-        my: 'myself',
-        mys: 'myselfness',
-        myss: 'mysselfyness'
-      }
+      words: WordsList.getWordsList
     }
     this.chatBox = React.createRef();
   }
@@ -47,6 +46,9 @@ class ChatBox extends React.PureComponent {
 
   updateMessage = (e) => {
     this.autoCompleteWord(e);
+    if(e.which === 32 && e.type === 'keydown' && this.state.toggleAutoComplete) {
+      this.learnNewWords();
+    }
   }
 
   triggerSuggestions = (e, text, char) => {
@@ -104,18 +106,79 @@ class ChatBox extends React.PureComponent {
   }
 
   learnNewWords = () => {
+    const fullText = this.chatBox.current.innerText;
+    const validText = fullText.split(' ').filter((word) => {
+      if(word.length >= MAX_NUMBER_OF_LETTERS_CHECKED) {
+        return word;
+      }
+    });
 
+    if(!validText.length) {
+      return;
+    }
+    
+    const existingWordsList = WordsList.getWordsList;
+    const tempWordsList = {};
+    validText.forEach((word) => {
+      const isWordAlreadyInList = (wordToCheck) => !!Object.values(WordsList.getWordsList).filter(word => word === wordToCheck).length
+      const isAbbrAlreadyInList = (abbrToCheck) => !!Object.keys(WordsList.getWordsList).filter(abbr => abbr === abbrToCheck).length;
+      const twoWordSubstring = word.substring(0, 2);
+      const threeWordSubstring = word.substring(0, 3);
+      const fourWordSubstring = word.substring(0, 4);
+      const isWordWithinMinLength = (substring) =>  word.length - substring.length >= MIN_CHAR_DIFFERENCE_BETWEEN_WORD_AND_ABBR;
+
+      if(!existingWordsList[twoWordSubstring] && isWordWithinMinLength(twoWordSubstring) && !isWordAlreadyInList(word) && !isAbbrAlreadyInList(twoWordSubstring)) {
+        tempWordsList[twoWordSubstring] = word;
+        return;
+      }
+
+      if(!existingWordsList[threeWordSubstring] && isWordWithinMinLength(threeWordSubstring) && !isWordAlreadyInList(word) && !isAbbrAlreadyInList(threeWordSubstring)) {
+        tempWordsList[threeWordSubstring] = word;
+        return;
+      }
+
+      if(!existingWordsList[fourWordSubstring] && isWordWithinMinLength(fourWordSubstring) && !isWordAlreadyInList(word) && !isAbbrAlreadyInList(fourWordSubstring)) {
+        tempWordsList[fourWordSubstring] = word;
+        return;
+      }
+    });
+
+    WordsList.setWordsList = tempWordsList;
+    this.setState({
+      ...this.state,
+      words: WordsList.getWordsList
+    })
   }
 
-
   render () {
+    const { words } = this.state;
+    const wordsAbbrList = Object.keys(words);
     return (
       <div className="row">
         <div className="col-md-3">
-          Learned words list:
+          {
+            wordsAbbrList.length ?<div className="wordsList">
+           <ul className="list-group">
+            <li className="list-group-item active">Learned words&nbsp; 
+              <span className="badge badge-warning badge-pill"> {wordsAbbrList.length}</span>
+            </li>
+            {
+              wordsAbbrList.map(abbr => {
+                return (<li className="list-group-item" key={abbr}>{ `${abbr} - ${this.state.words[abbr]}` }</li>)
+              })
+            }
+            </ul>
+          </div>  : null
+          }
         </div>
         <div className="card col-md-6">
-        <h5 className="card-header">React google smart compose</h5>
+        <h5 className="card-header">
+          Google smart compose replica
+          {/* <button type="button" onClick={() => this.toggleAutoComplete()} className="btn btn-sm btn-outline-danger float-right">
+            Autocomplete&nbsp;
+            <span className="badge badge-primary"></span>
+          </button> */}
+        </h5>
         <div className="card-body">
         <div className="ChatBox">
             <div className="ChatBoxMessage">
@@ -134,7 +197,19 @@ class ChatBox extends React.PureComponent {
             </div>
             </div>
             <br/>
-            <button type="button" className="btn btn-primary btn-lg btn-block">Learn more words</button>
+          </div>
+          <div>
+            <ul>
+              <li>
+                To autocomplete an existing abbreviation from the list press ENTER.
+              </li>
+              <li>
+                Words must have a min length of 4 characters.
+              </li>
+              <li>
+                Words must have at least 2 characters between the abbreviation and the actual word.
+              </li>
+            </ul>
           </div>
         </div>
       </div>
