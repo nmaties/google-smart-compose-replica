@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/google-smart-compose-replica/precache-manifest.47b1de33b309da9325ffbd01f36f8e46.js"
+  "/google-smart-compose-replica/precache-manifest.ddffee6a4773510882cd006df5d2fa8a.js"
 );
 
 self.addEventListener('message', (event) => {
