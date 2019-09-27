@@ -46,7 +46,7 @@ class ChatBox extends React.PureComponent {
 
   updateMessage = (e) => {
     this.autoCompleteWord(e);
-    if(e.which === 32 && e.type === 'keydown' && this.state.toggleAutoComplete) {
+    if(e.which === 32 && e.type === 'keydown') {
       this.learnNewWords();
     }
   }
@@ -174,10 +174,6 @@ class ChatBox extends React.PureComponent {
         <div className="card col-md-6">
         <h5 className="card-header">
           Google smart compose replica
-          {/* <button type="button" onClick={() => this.toggleAutoComplete()} className="btn btn-sm btn-outline-danger float-right">
-            Autocomplete&nbsp;
-            <span className="badge badge-primary"></span>
-          </button> */}
         </h5>
         <div className="card-body">
         <div className="ChatBox">
