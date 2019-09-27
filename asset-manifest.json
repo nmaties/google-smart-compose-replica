@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/google-smart-compose-replica/static/css/main.b704a955.chunk.css",
+    "main.js": "/google-smart-compose-replica/static/js/main.0683a5db.chunk.js",
+    "main.js.map": "/google-smart-compose-replica/static/js/main.0683a5db.chunk.js.map",
+    "runtime-main.js": "/google-smart-compose-replica/static/js/runtime-main.f73dc109.js",
+    "runtime-main.js.map": "/google-smart-compose-replica/static/js/runtime-main.f73dc109.js.map",
+    "static/js/2.85729427.chunk.js": "/google-smart-compose-replica/static/js/2.85729427.chunk.js",
+    "static/js/2.85729427.chunk.js.map": "/google-smart-compose-replica/static/js/2.85729427.chunk.js.map",
+    "index.html": "/google-smart-compose-replica/index.html",
+    "precache-manifest.47b1de33b309da9325ffbd01f36f8e46.js": "/google-smart-compose-replica/precache-manifest.47b1de33b309da9325ffbd01f36f8e46.js",
+    "service-worker.js": "/google-smart-compose-replica/service-worker.js",
+    "static/css/main.b704a955.chunk.css.map": "/google-smart-compose-replica/static/css/main.b704a955.chunk.css.map"
+  }
+}
